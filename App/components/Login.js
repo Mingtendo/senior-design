@@ -32,7 +32,7 @@ class Login extends React.Component {
             Alert.alert('Enter details to login!')
         } else {
             this.setState({
-                isLoading: true,
+                isLoading: false,
             })
             firebase
             .auth()
@@ -40,11 +40,11 @@ class Login extends React.Component {
             .then((res) => {
                 console.log(res)
                 console.log('User login successful!')
-                this.setState({
-                    isLoading: false,
+                /* this.setState({
+                    isLoading: true,
                     email: '',
                     password: ''
-                })
+                }) */
                 this.props.navigation.navigate('Chat')
             })
             .catch(error => this.setState ({ errorMessage: error.message}))
@@ -52,13 +52,13 @@ class Login extends React.Component {
     }
 
     render() {
-        if(this.state.isLoading){
+       /* if(this.state.isLoading){
             return(
                 <View style={styles.preloader}>
                     <ActivityIndicator size="large" color="#9E9E9E"/>
                 </View>
             )
-        }
+        }*/
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
