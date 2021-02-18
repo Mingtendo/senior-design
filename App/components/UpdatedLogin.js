@@ -1,68 +1,70 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from '../firebase';
 
 
-export default function App({navigation}) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+export default function App({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const login = async() =>{
-        //setShowLoading(true);
-        try {
-            const doLogin = await firebase.auth().signInWithEmailAndPassword(email, password);
-            //setShowLoading(false);
-            if(doLogin.user) {
-                navigation.navigate('Chat');
-            }
-        } catch (e) {
-            //setShowLoading(false);
-            Alert.alert(
-                e.message
-            );
-        }
-    };
+  const login = async () => {
+    //setShowLoading(true);
+    try {
+      const doLogin = await firebase.auth().signInWithEmailAndPassword(email, password);
+      //setShowLoading(false);
+      if (doLogin.user) {
+        navigation.navigate('Chat');
+      }
+    } catch (e) {
+      //setShowLoading(false);
+      Alert.alert(
+        e.message
+      );
+    }
+  };
 
 
   return (
-    <View style={styles.container}>
-      {/* <Image style={styles.image} source = {require("./assets/UStudy.png")}/> */}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        {/* <Image style={styles.image} source = {require("./assets/UStudy.png")}/> */}
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email:"
-          placeholderTextColor="#003f5c"
-          value={email}
-          onChangeText={(email) => setEmail(email)}
-        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Email:"
+            placeholderTextColor="#003f5c"
+            value={email}
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password:"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(password) => setPassword(password)}
+          />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.forgot_button}>Forgot Password?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
+          <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={styles.forgot_button} onPress={() => navigation.navigate("Register")}>Need an account? Sign Up</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.terms}>Terms of Use • Help • Privacy Policy</Text>
+
       </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password:"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(password) => setPassword(password)}
-        />
-      </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.loginBtn} onPress={()=>login()}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Text style={styles.forgot_button} onPress={() => navigation.navigate("Register")}>Need an account? Sign Up</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.terms}>Terms of Use • Help • Privacy Policy</Text>
-
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -72,9 +74,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-   },
+  },
 
-   image :{
+  image: {
     width: 200,
     height: 200,
     marginBottom: 40
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
-    alignItems: "flex-start",
+    //alignItems: "flex-start",
   },
 
   TextInput: {
@@ -113,7 +115,8 @@ const styles = StyleSheet.create({
 
   terms: {
     position: 'absolute',
-    bottom: 5,
+    bottom: 15
+    ,
   },
-    
+
 });

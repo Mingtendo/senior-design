@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, ActivityIndicator, View, StyleSheet, Text, TextInput, TouchableOpacity,} from 'react-native';
+import { Alert, ActivityIndicator, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from '../firebase';
 
-export default function App({navigation}) {
+export default function App({ navigation }) {
 
     const [displayName, setdisplayName] = useState('');
     const [email, setEmail] = useState('');
@@ -10,45 +10,51 @@ export default function App({navigation}) {
     const [passwordConfirm, setpasswordConfirm] = useState('');
 
 
-/*     registerUser = () => {
-        if(this.state.email === '' && this.state.password === '' && this.state.passwordConfirm === '') {
-            Alert.alert('Enter details to register!')
-        } else {
-            if (this.state.password !== this.state.passwordConfirm) {
-                Alert.alert('Passwords do not match!')
+    /*     registerUser = () => {
+            if(this.state.email === '' && this.state.password === '' && this.state.passwordConfirm === '') {
+                Alert.alert('Enter details to register!')
             } else {
-                this.setState({
-                    isLoading: true,
-                })
-                firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then((res) => {
-                    res.user.updateProfile({
-                        displayName: this.state.displayName
-                    })
-                    console.log('User registered successfully!')
+                if (this.state.password !== this.state.passwordConfirm) {
+                    Alert.alert('Passwords do not match!')
+                } else {
                     this.setState({
-                        isLoading: false,
-                        displayName: '',
-                        email: '',
-                        password: ''
+                        isLoading: true,
                     })
-                    this.props.navigation.navigate('Login')
-                })
-                .catch(error => this.setState ({ errorMessage: error.message}))
-            }
-        } */
-    
-    const register = async() =>{
+                    firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+                    .then((res) => {
+                        res.user.updateProfile({
+                            displayName: this.state.displayName
+                        })
+                        console.log('User registered successfully!')
+                        this.setState({
+                            isLoading: false,
+                            displayName: '',
+                            email: '',
+                            password: ''
+                        })
+                        this.props.navigation.navigate('Login')
+                    })
+                    .catch(error => this.setState ({ errorMessage: error.message}))
+                }
+            } */
+
+    const register = async () => {
         //setShowLoading(true);
-        if(email === '' && password === ''){Alert.alert('Enter details to register!')}
-        if(password !== passwordConfirm){ Alert.alert('Passwords do not match!')}
-        else{
+        if (email === '' && password === '') { Alert.alert('Enter details to register!') }
+        if (password !== passwordConfirm) { Alert.alert('Passwords do not match!') }
+        else {
             try {
                 const doRegister = await firebase.auth().createUserWithEmailAndPassword(email, password);
                 //setShowLoading(false);
-                if(doRegister.user) {
+                if (doRegister.user) {
+                    try {
+                        firebase.auth().currentUser.sendEmailVerification();
+                    } catch (e) {
+                        Alert.alert(e.message);
+                    }
+
                     navigation.navigate('Chat');
                 }
             } catch (e) {
@@ -57,66 +63,68 @@ export default function App({navigation}) {
                     e.message
                 );
             }
-            
+
         }
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                Enter your name:
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+                <Text style={styles.title}>
+                    Enter your name:
             </Text>
-            <TextInput
-                style={styles.input}
-                placeHolder="Name"
-                value={displayName}
-                onChangeText={(displayName) => setdisplayName(displayName)}
-            />
-            <Text style={styles.title}>
-                Enter your UConn email address:
+                <TextInput
+                    style={styles.input}
+                    placeHolder="Name"
+                    value={displayName}
+                    onChangeText={(displayName) => setdisplayName(displayName)}
+                />
+                <Text style={styles.title}>
+                    Enter your UConn email address:
             </Text>
-            <TextInput
-                style={styles.input}
-                placeHolder="Email"
-                autoCapitalize = "none"
-                value={email}
-                onChangeText={(email) => setEmail(email)}
-            />
-            <Text style={styles.title}>
-                Choose a Password:
+                <TextInput
+                    style={styles.input}
+                    placeHolder="Email"
+                    autoCapitalize="none"
+                    value={email}
+                    onChangeText={(email) => setEmail(email)}
+                />
+                <Text style={styles.title}>
+                    Choose a Password:
             </Text>
-            <TextInput
-                style={styles.input}
-                placeHolder="Password"
-                autoCapitalize = "none"
-                value={password}
-                onChangeText={(password) => setPassword(password)}
-                secureTextEntry={true}
-            />
-            <Text style={styles.title}>
-                Re-type Password:
+                <TextInput
+                    style={styles.input}
+                    placeHolder="Password"
+                    autoCapitalize="none"
+                    value={password}
+                    onChangeText={(password) => setPassword(password)}
+                    secureTextEntry={true}
+                />
+                <Text style={styles.title}>
+                    Re-type Password:
             </Text>
-            <TextInput
-                style={styles.input}
-                placeHolder="Confirm Password"
-                autoCapitalize = "none"
-                value={passwordConfirm}
-                onChangeText={(passwordConfirm) => setpasswordConfirm(passwordConfirm)}
-                secureTextEntry={true}
-            />
-            <TouchableOpacity
-                onPress={() => register()}
-                style={styles.submitButton}
+                <TextInput
+                    style={styles.input}
+                    placeHolder="Confirm Password"
+                    autoCapitalize="none"
+                    value={passwordConfirm}
+                    onChangeText={(passwordConfirm) => setpasswordConfirm(passwordConfirm)}
+                    secureTextEntry={true}
+                />
+                <TouchableOpacity
+                    onPress={() => register()}
+                    style={styles.submitButton}
                 >
-                <Text style={styles.submitButtonText}>
-                    Submit
+                    <Text style={styles.submitButtonText}>
+                        Submit
                 </Text>
-            </TouchableOpacity>
-            <Text style={styles.loginText}
-                onPress={() => navigation.navigate('Login')}>
-                Already Registered? Click here to login
+                </TouchableOpacity>
+                <Text style={styles.loginText}
+                    onPress={() => navigation.navigate('Login')}>
+                    Already Registered? Click here to login
             </Text>
-        </View>
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 
