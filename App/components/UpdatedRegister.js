@@ -70,99 +70,115 @@ export default function App({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
-                <Text style={styles.title}>
-                    Enter your name:
-            </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Name"
-                    value={displayName}
-                    onChangeText={(displayName) => setdisplayName(displayName)}
-                />
-                <Text style={styles.title}>
-                    Enter your UConn email address:
-            </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Email"
-                    autoCapitalize="none"
-                    value={email}
-                    onChangeText={(email) => setEmail(email)}
-                />
-                <Text style={styles.title}>
-                    Choose a Password:
-            </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Password"
-                    autoCapitalize="none"
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                    secureTextEntry={true}
-                />
-                <Text style={styles.title}>
-                    Re-type Password:
-            </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Confirm Password"
-                    autoCapitalize="none"
-                    value={passwordConfirm}
-                    onChangeText={(passwordConfirm) => setpasswordConfirm(passwordConfirm)}
-                    secureTextEntry={true}
-                />
-                <TouchableOpacity
-                    onPress={() => register()}
-                    style={styles.submitButton}
-                >
-                    <Text style={styles.submitButtonText}>
-                        Submit
-                </Text>
+                <Image style={styles.image} source={require("./assets/Ustudy.png")} />
+
+                <Text style={styles.joinUs}>Join UStudy</Text>
+
+                <StatusBar style="auto" />
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder="Name:"
+                        placeholderTextColor="#003f5c"
+                        onChangeText={(name) => setdisplayName(name)}
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder="Email:"
+                        placeholderTextColor="#003f5c"
+                        onChangeText={(email) => setEmail(email)}
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder="Password:"
+                        placeholderTextColor="#003f5c"
+                        secureTextEntry={true}
+                        onChangeText={(password) => setPassword(password)}
+
+                    />
+                </View>
+
+                <View style={styles.inputView}>
+                    <TextInput
+                        style={styles.TextInput}
+                        placeholder="Confirm Password:"
+                        placeholderTextColor="#003f5c"
+                        secureTextEntry={true}
+                        onChangeText={(password) => setpasswordConfirm(password)}
+                    />
+                </View>
+
+                <TouchableOpacity style={styles.signUpBtn}>
+                    <Text style={styles.loginText} onPress={()=>register()}>SIGN UP</Text>
                 </TouchableOpacity>
-                <Text style={styles.loginText}
-                    onPress={() => navigation.navigate('Login')}>
-                    Already Registered? Click here to login
-            </Text>
+
+                <TouchableOpacity>
+                    <Text style={styles.login_button} 
+                    onPress={navigation.navigate('Login')}>
+                        Already have an account? Log In</Text>
+                </TouchableOpacity>
+
+
             </View>
         </TouchableWithoutFeedback>
     );
 }
 
-const offset = 15;
 const styles = StyleSheet.create({
-    title: {
-        marginTop: offset,
-        marginLeft: offset,
-        fontSize: 20,
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+     },
+  
+     image :{
+      width: 50,
+      height: 50,
+      position: 'absolute',
+      top: 40,
     },
-    submitButton: {
-        margin: offset,
-        backgroundColor: '#000080',
+  
+    joinUs: {
+      position: 'absolute',
+      top: 100,
     },
-    submitButtonText: {
-        margin: offset,
-        fontSize: 20,
-        color: 'white'
+  
+    inputView: {
+      backgroundColor: "#C2E0F9",
+      borderRadius: 30,
+      width: "70%",
+      height: 45,
+      marginBottom: 10,
     },
-    input: {
-        margin: offset,
-        padding: offset,
-        fontSize: offset,
-        borderColor: '#111111',
-        borderWidth: 1,
+  
+    TextInput: {
+      height: 50,
+      flex: 1,
+      padding: 10,
+      marginLeft: 20,
     },
-    loginText: {
-        color: '#3740FE',
-        marginTop: 10,
-        textAlign: 'center'
+  
+    login_button: {
+      height: 30,
+      marginBottom: 30,
     },
-    preloader: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-});
+  
+    signUpBtn: {
+      width: "80%",
+      borderRadius: 25,
+      height: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 20,
+      backgroundColor: "#2174C3",
+    },
+  
+  });
