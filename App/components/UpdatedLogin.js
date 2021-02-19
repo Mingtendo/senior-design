@@ -27,7 +27,7 @@ export default function App({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        {/* <Image style={styles.image} source = {require("./assets/UStudy.png")}/> */}
+       <Image style={styles.image} source = {require("../assets/UStudy.png")}/>
 
         <View style={styles.inputView}>
           <TextInput
@@ -57,8 +57,8 @@ export default function App({ navigation }) {
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
-          <Text style={styles.forgot_button} onPress={() => navigation.navigate("Register")}>Need an account? Sign Up</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={styles.forgot_button}>Need an account? Sign Up</Text>
         </TouchableOpacity>
 
         <Text style={styles.terms}>Terms of Use • Help • Privacy Policy</Text>
@@ -115,8 +115,7 @@ const styles = StyleSheet.create({
 
   terms: {
     position: 'absolute',
-    bottom: 15
-    ,
+    bottom: 15,
   },
 
 });
