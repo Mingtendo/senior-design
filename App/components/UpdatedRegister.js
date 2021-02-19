@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, ActivityIndicator, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Alert, ActivityIndicator, View, StyleSheet, Text, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from '../firebase';
 
 export default function App({ navigation }) {
@@ -70,6 +70,7 @@ export default function App({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
+                <Image style={styles.image} source={require("../assets/UStudy.png")}/>
                 <Text style={styles.joinUs}>Join UStudy</Text>
 
                 <View style={styles.inputView}>

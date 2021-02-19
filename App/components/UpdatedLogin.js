@@ -27,7 +27,7 @@ export default function App({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        {/* <Image style={styles.image} source = {require("./assets/UStudy.png")}/> */}
+       <Image style={styles.image} source = {require("../assets/UStudy.png")}/>
 
         <View style={styles.inputView}>
           <TextInput
