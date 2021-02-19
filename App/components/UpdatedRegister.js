@@ -70,8 +70,6 @@ export default function App({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
-                {/* <Image style={styles.image} source={require("./assets/Ustudy.png")} /> */}
-
                 <Text style={styles.joinUs}>Join UStudy</Text>
 
                 <View style={styles.inputView}>
@@ -126,7 +124,7 @@ export default function App({ navigation }) {
 
                 <TouchableOpacity>
                     <Text style={styles.login_button}
-                        onPress={navigation.navigate('Login')}>
+                        onPress={() => navigation.navigate('Login')}>
                         Already have an account? Log In</Text>
                 </TouchableOpacity>
             </View>
