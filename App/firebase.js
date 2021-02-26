@@ -10,4 +10,6 @@ firebase.initializeApp({
     measurementId: "G-DKFCS06P5Q",
 });
 
+var user = firebase.auth().currentUser;
+
 export default firebase;
