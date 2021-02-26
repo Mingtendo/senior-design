@@ -29,22 +29,13 @@ function MyStack() {
         options={{ title: 'Login', headerLeft: null }}
       />
       <Stack.Screen
-        name="Chat"
-        component={Chat}
-        options={{ title: 'Chat', headerLeft: null }}
+        name="Menu"
+        component={Menu}
+        options={{headerLeft: null, headerShown: false}}
       />
     </Stack.Navigator>
   )
 }
-
-// function loginScreen() {
-//   var isLoggedIn = firebase.auth().currentUser;
-//   if (isLoggedIn) {
-//     return (
-//       <Login></Login>
-//     )
-//   }
-// }
 
 export default function App() {
   return (

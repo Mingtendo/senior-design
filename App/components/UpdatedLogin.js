@@ -13,7 +13,7 @@ export default function App({ navigation }) {
       const doLogin = await firebase.auth().signInWithEmailAndPassword(email, password);
       //setShowLoading(false);
       if (doLogin.user) {
-        navigation.navigate('Chat');
+        navigation.navigate('Menu');
       }
     } catch (e) {
       //setShowLoading(false);
