@@ -1,4 +1,6 @@
-import * as firebase from 'firebase';
+var firebase = require("firebase/app");
+require("firebase/auth");
+require('firebase/firestore');
 
 firebase.initializeApp({
     apiKey: "AIzaSyDf6aarMyl4B9komXyUyAQ2U8xoLu0V43Q",
@@ -9,7 +11,5 @@ firebase.initializeApp({
     appId: "1:1074725550611:web:1b48877c931aab22bc9de6",
     measurementId: "G-DKFCS06P5Q",
 });
-
-var user = firebase.auth().currentUser;
 
 export default firebase;

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-import * as firebase from 'firebase';
+import firebase from '../firebase';
 
+import {Auth} from './AuthContext';
 
 /* class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -26,9 +27,9 @@ export default Chat; */
 
 export default function App(props) {
 
-    //const { user } = props.route.params.doLogin.user;
+    const { user } = useContext(Auth);
     const [messages, setMessages] = useState([]);
-    //const currentUser = user.toJSON();
+    const currentUser = user.toJSON();
 
     async function handleSend(messages) {
         const text = messages[0].text;
@@ -37,8 +38,8 @@ export default function App(props) {
             text,
             createdAt: new Date().getTime(),
              user: {
-                _id: 'Ming',
-                email: 'chris@uconn.edu'
+                _id: currentUser.uid,
+                email: currentUser.email
             } 
         });
     }
@@ -78,7 +79,7 @@ export default function App(props) {
         <GiftedChat
             messages={messages}
             onSend={handleSend}
-            //user={{ _id: user.uid }}
+            user={{ _id: currentUser.uid }}
             placeholder='Type your message here...'
             alwaysShowSend
             scrollToBottom
@@ -87,5 +88,11 @@ export default function App(props) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 
 });
