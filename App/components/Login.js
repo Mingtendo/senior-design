@@ -12,10 +12,7 @@ export default function App({ navigation }) {
   const { login } = useContext(Auth);
 
   const loginNavigation = (email, password) => {
-    login(email, password).then(() => {
-        navigation.navigate('Menu');
-    })
-    .catch(err => { 
+    login(email, password).catch(err => { 
         console.log(err);
     })
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import ProfileScreen from './Profile';
-import ChatScreen from './Chat';
+import ChatMenu from './ChatMenu';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -13,7 +13,7 @@ export default function Menu(props) {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen name="Chat" component={ChatMenu} />
     </Tab.Navigator>
   );
 }

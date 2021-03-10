@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from '../firebase';
 
-import {Auth} from './AuthContext';
+import { Auth } from './AuthContext';
 
 /* class Chat extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -25,29 +25,49 @@ import {Auth} from './AuthContext';
 
 export default Chat; */
 
-export default function App(props) {
+export default function App({ route }) {
 
     const { user } = useContext(Auth);
+    const { chat } = route.params;
     const [messages, setMessages] = useState([]);
     const currentUser = user.toJSON();
 
     async function handleSend(messages) {
         const text = messages[0].text;
 
-        firebase.firestore().collection('TestMessages').add({
-            text,
-            createdAt: new Date().getTime(),
-             user: {
-                _id: currentUser.uid,
-                email: currentUser.email
-            } 
-        });
+        firebase.firestore()
+            .collection('CHATS')
+            .doc(chat._id)
+            .collection('MESSAGES')
+            .add({
+                text,
+                createdAt: new Date().getTime(),
+                user: {
+                    _id: currentUser.uid,
+                    email: currentUser.email
+                }
+            });
+
+        await firebase.firestore()
+            .collection('CHATS')
+            .doc(chat._id)
+            .set({
+                latestMessage: {
+                    text,
+                    createdAt: new Date().getTime()
+                }
+            },
+                { merge: true }
+            );
+
     }
 
 
     useEffect(() => {
         const messagesListener = firebase.firestore()
-            .collection('TestMessages')
+            .collection('CHATS')
+            .doc(chat._id)
+            .collection('MESSAGES')
             .orderBy('createdAt', 'desc')
             .onSnapshot(query => {
                 const messages = query.docs.map(doc => {

@@ -16,7 +16,7 @@ import firebase from '../firebase';
 const Stack = createStackNavigator();
 
 
-function MyStack() {
+function LoginStack() {
   return (
     <Stack.Navigator
       initialRouteName="Login"
@@ -30,11 +30,6 @@ function MyStack() {
         name="Login"
         component={Login}
         options={{ title: 'Login', headerLeft: null }}
-      />
-      <Stack.Screen
-        name="Menu"
-        component={Menu}
-        options={{headerLeft: null, headerShown: false}}
       />
     </Stack.Navigator>
   )
@@ -59,7 +54,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <MyStack />
+        {user ? <Menu/> : <LoginStack /> }
       </NavigationContainer>
   );
 }

@@ -33,7 +33,7 @@ export const AuthContext = ({ children }) => {
           try {
             await firebase.auth().signOut();
           } catch (e) {
-            console.error(e);
+            throw(e);
           }
         }
       }}
