@@ -1,141 +1,131 @@
-import React from 'react';
-import { 
-    Alert,
-    ActivityIndicator,
-    View,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import firebase from '../firebase';
 
-class Login extends React.Component {
+import {Auth} from './AuthContext';
 
-    constructor(){
-        super();
-        this.state = {
-            email: '',
-            password: '',
-            isLoading: false
-        }
-    }
 
-    updateInputVal = (val, prop) => {
-        const state = this.state;
-        state[prop] = val;
-        this.setState(state);
-    }
+export default function App({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    userLogin = () => {
-        if(this.state.email === '' && this.state.password === '') {
-            Alert.alert('Enter details to login!')
-        } else {
-            this.setState({
-                isLoading: false,
-            })
-            firebase
-            .auth()
-            .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((res) => {
-                console.log(res)
-                console.log('User login successful!')
-                /* this.setState({
-                    isLoading: true,
-                    email: '',
-                    password: ''
-                }) */
-                this.props.navigation.navigate('Chat')
-            })
-            .catch(error => this.setState ({ errorMessage: error.message}))
-        }
-    }
+  const { login } = useContext(Auth);
 
-    render() {
-       /* if(this.state.isLoading){
-            return(
-                <View style={styles.preloader}>
-                    <ActivityIndicator size="large" color="#9E9E9E"/>
-                </View>
-            )
-        }*/
-        return (
-            <View style={styles.container}>
-                <Text style={styles.title}>
-                    Email:
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Email"
-                    autoCapitalize = "none"
-                    value={this.state.email}
-                    onChangeText={(val) => this.updateInputVal(val, 'email')}
-                />
-                <Text style={styles.title}>
-                    Password:
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    placeHolder="Password"
-                    autoCapitalize = "none"
-                    value={this.state.password}
-                    onChangeText={(val) => this.updateInputVal(val, 'password')}
-                    secureTextEntry={true}
-                />
-                <TouchableOpacity
-                    onPress={this.userLogin()}
-                    style={styles.loginButton}
-                    >
-                    <Text style={styles.loginButtonText}>
-                        Login
-                    </Text>
-                </TouchableOpacity>
-                <Text style={styles.registerText}
-                    onPress={() => this.props.navigation.navigate('Register')}>
-                    Don't have an account? Click here to sign up
-                </Text>
-            </View>
-        );
-    }
+  const loginNavigation = (email, password) => {
+    login(email, password).catch(err => { 
+        console.log(err);
+    })
 }
 
-const offset = 15;
-const styles = StyleSheet.create({
-    title: {
-        marginTop: offset,
-        marginLeft: offset,
-        fontSize: 20,
-    },
-    loginButton: {
-        margin: offset,
-        backgroundColor: '#000080',
-    },
-    loginButtonText: {
-        margin: offset,
-        fontSize: 20,
-        color: 'white'
-    },
-    input: {
-        margin: offset,
-        padding: offset,
-        fontSize: offset,
-        borderColor: '#111111',
-        borderWidth: 1,
-    },
-    registerText: {
-        color: '#3740FE',
-        marginTop: 10,
-        textAlign: 'center'
-    },
-    preloader: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
+/*   const login = async () => {
+    //setShowLoading(true);
+    try {
+      const doLogin = await firebase.auth().signInWithEmailAndPassword(email, password);
+      //setShowLoading(false);
+      if (doLogin.user) {
+        navigation.navigate('Menu');
+      }
+    } catch (e) {
+      //setShowLoading(false);
+      Alert.alert(
+        e.message
+      );
     }
-});
+  }; */
 
-export default Login;
+
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+       <Image style={styles.image} source = {require("../assets/UStudy.png")}/>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Email:"
+            placeholderTextColor="#003f5c"
+            value={email}
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password:"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(password) => setPassword(password)}
+          />
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.forgot_button}>Forgot Password?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.loginBtn} onPress={() => loginNavigation(email, password)}>
+          <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={styles.forgot_button}>Need an account? Sign Up</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.terms}>Terms of Use • Help • Privacy Policy</Text>
+
+      </View>
+    </TouchableWithoutFeedback>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 40
+  },
+
+  inputView: {
+    backgroundColor: "#C2E0F9",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    //alignItems: "flex-start",
+  },
+
+  TextInput: {
+    height: 50,
+    flex: 1,
+    padding: 10,
+    marginLeft: 20,
+  },
+
+  forgot_button: {
+    height: 30,
+    marginBottom: 30,
+  },
+
+  loginBtn: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: "#2174C3",
+  },
+
+  terms: {
+    position: 'absolute',
+    bottom: 15,
+  },
+
+});
