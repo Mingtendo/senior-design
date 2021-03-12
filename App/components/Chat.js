@@ -1,29 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
+import { IconButton } from 'react-native-paper';
 import firebase from '../firebase';
 
 import { Auth } from './AuthContext';
-
-/* class Chat extends React.Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: (navigation.state.params || {}).email || 'Chat!',
-    });
-
-    state = {
-        messages: [],
-    };
-
-    render() {
-        return (
-            <GiftedChat
-                messages={this.state.messages}
-            />
-        );
-    }
-}
-
-export default Chat; */
 
 export default function App({ route }) {
 
@@ -95,13 +76,43 @@ export default function App({ route }) {
         return () => messagesListener();
     }, []);
 
+    function renderBubble(props){
+        return(
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    right:{
+                        backgroundColor: '00BFFF'
+                    }
+                }}
+                textStyle={{
+                    right:{
+                        color: '#FFF'
+                    }
+                }}
+            />
+        );
+    }
+
+    function renderSend(props){
+        return(
+            <Send {...props}>
+                <View style={StyleSheet.sendingContainer}>
+                    <IconButton icon='send-circle' size={28} color='#00BFFF'/>
+                </View>
+            </Send>
+        );
+    }
+
     return (
         <GiftedChat
             messages={messages}
             onSend={handleSend}
             user={{ _id: currentUser.uid }}
+            // renderBubble={renderBubble}
             placeholder='Type your message here...'
             alwaysShowSend
+            renderSend={renderSend}
             scrollToBottom
         />
     );
