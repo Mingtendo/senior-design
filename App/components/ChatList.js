@@ -52,15 +52,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
+
     chat: {
+        backgroundColor: "#C2E0F9",
+        alignItems:'center',
+        width: 'auto',
+        borderRadius: 30,
+        height: 45,
         margin: 10,
     },
-    chatTitle: {
-        color: 'blue',
-        fontSize: 32
-    }
 
+    chatTitle: {
+        color: 'white',
+        flex: 1,
+        fontSize: 20,
+        padding: 10,
+    },
 });

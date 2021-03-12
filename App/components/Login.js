@@ -59,7 +59,7 @@ export default function App({ navigation }) {
             onChangeText={(password) => setPassword(password)}
           />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
 
