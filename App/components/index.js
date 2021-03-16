@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './Login';
 import Menu from './Menu';
 import Register from './Register';
+import Forgot from './ForgotPass';
 
 import {Auth} from './AuthContext'
 
@@ -30,6 +31,11 @@ function LoginStack() {
         name="Login"
         component={Login}
         options={{ title: 'Login', headerLeft: null }}
+      />
+      <Stack.Screen
+        name="Forgot"
+        component={Forgot}
+        options={{ title: 'Forgot Password'}}
       />
     </Stack.Navigator>
   )

@@ -39,9 +39,11 @@ export default function ChatList({ navigation }) {
             data={chats}
             keyExtractor={item => item._id}
             renderItem={({ item }) => (
+            <View style={styles.list}>
               <TouchableOpacity style={styles.chat} onPress={() => navigation.navigate('Chat', { chat: item })}>
                   <Text style={styles.chatTitle}>{item.name}</Text>
               </TouchableOpacity>
+            </View>
             )}
           />
         </View>
@@ -52,15 +54,25 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
+
+    list: {
+        
+    },
+
     chat: {
+        backgroundColor: "#2174C3",
+        alignItems:'center',
+        width: 'auto',
+        borderRadius: 30,
+        height: 45,
         margin: 10,
     },
-    chatTitle: {
-        color: 'blue',
-        fontSize: 32
-    }
 
+    chatTitle: {
+        color: 'white',
+        flex: 1,
+        fontSize: 20,
+        padding: 10,
+    },
 });
