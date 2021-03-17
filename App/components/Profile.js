@@ -13,6 +13,11 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <Text>Profile page will be listed here</Text>
 
+            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Courses')}>
+                <Text style={styles.loginText}>Select Courses</Text>
+            </TouchableOpacity>
+
+
             <TouchableOpacity style={styles.loginBtn} onPress={() => logout()}>
                 <Text style={styles.loginText}>LOGOUT</Text>
             </TouchableOpacity>
