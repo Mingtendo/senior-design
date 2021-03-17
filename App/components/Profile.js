@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from '../firebase';
@@ -7,7 +7,23 @@ import {Auth} from './AuthContext';
 
 export default function App({ navigation }) {
 
-    const { logout } = useContext(Auth);
+    const { logout, user } = useContext(Auth);
+    const currentUser = user.toJSON();
+
+    useEffect(() => {
+        async function profileListener() {
+            const userRef = firebase.firestore()
+            .collection('PROFILES')
+            .doc(currentUser.uid)
+            const doc = await userRef.get();
+            if (!doc.exists) {
+                console.log('No user found.');
+            } else{
+                console.log(doc.data());
+            }
+        }
+        profileListener();
+    }, []);
 
     return (
         <View style={styles.container}>

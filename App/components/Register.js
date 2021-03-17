@@ -11,7 +11,7 @@ export default function App({ navigation }) {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setpasswordConfirm] = useState('');
 
-    const {register } = useContext(Auth);
+    const {register} = useContext(Auth);
 
     const registerNavigation = (email, password, passwordConfirm) => {
         register(email, password, passwordConfirm).then(() => {
