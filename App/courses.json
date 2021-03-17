@@ -3,282 +3,282 @@
         {
             "name": "CSE 1000",
             "title": "Computers in Modern Society",
-            "group_id": "cse_1000"
+            "id": "cse_1000"
         },
         {
             "name": "CSE 1010",
             "title": "Introduction to Computing for Engineers",
-            "group_id": "cse_1010"
+            "id": "cse_1010"
         },
         {
             "name": "CSE 1100",
             "title": "Introduction to Computing",
-            "group_id": "cse_1100"
+            "id": "cse_1100"
         },
         {
             "name": "CSE 1102",
             "title": "Object Oriented Design and Programming",
-            "group_id": "cse_1102"
+            "id": "cse_1102"
         },
         {
             "name": "CSE 1401",
             "title": "Honors Core: Computational Molecular Biology",
-            "group_id": "cse_1401"
+            "id": "cse_1401"
         },
         {
             "name": "CSE 1729",
             "title": "Introduction to Principles of Programming",
-            "group_id": "cse_1729"
+            "id": "cse_1729"
         },
         {
             "name": "CSE 2050",
             "title": "Data Structures and Object-Oriented Design",
-            "group_id": "cse_2050"
+            "id": "cse_2050"
         },
         {
             "name": "CSE 2100",
             "title": "Data Structures and Introduction to Algorithms",
-            "group_id": "cse_2100"
+            "id": "cse_2100"
         },
         {
             "name": "CSE 2102",
             "title": "Introduction to Software Engineering",
-            "group_id": "cse_2102"
+            "id": "cse_2102"
         },
         {
             "name": "CSE 2193",
             "title": "International Study",
-            "group_id": "cse_2193"
+            "id": "cse_2193"
         },
         {
             "name": "CSE 2300W",
             "title": "Digital Logic Design",
-            "group_id": "cse_2300w"
+            "id": "cse_2300w"
         },
         {
             "name": "CSE 2301",
             "title": "Principles and Practice of Digital Logic Design",
-            "group_id": "cse_2301"
+            "id": "cse_2301"
         },
         {
             "name": "CSE 2304",
             "title": "Computer Architecture",
-            "group_id": "cse_2304"
+            "id": "cse_2304"
         },
         {
             "name": "CSE 2500",
             "title": "Introduction to Discrete Systems",
-            "group_id": "cse_2500"
+            "id": "cse_2500"
         },
         {
             "name": "CSE 3000",
             "title": "Contemporary Issues in Computer Science and Engineering",
-            "group_id": "cse_3000"
+            "id": "cse_3000"
         },
         {
             "name": "CSE 3002",
             "title": "Social, Ethical and Professional Issues in Computer Science and Engineering",
-            "group_id": "cse_3002"
+            "id": "cse_3002"
         },
         {
             "name": "CSE 3100",
             "title": "Systems Programming",
-            "group_id": "cse_3100"
+            "id": "cse_3100"
         },
         {
             "name": "CSE 3140",
             "title": "Cybersecurity Lab",
-            "group_id": "cse_3140"
+            "id": "cse_3140"
         },
         {
             "name": "CSE 3150",
             "title": "C++ Essentials",
-            "group_id": "cse_3150"
+            "id": "cse_3150"
         },
         {
             "name": "CSE 3193",
             "title": "International Study",
-            "group_id": "cse_3193"
+            "id": "cse_3193"
         },
         {
             "name": "CSE 3300",
             "title": "Computer Networks and Data Communication",
-            "group_id": "cse_3300"
+            "id": "cse_3300"
         },
         {
             "name": "CSE 3302",
             "title": "Digital Systems Design",
-            "group_id": "cse_3302"
+            "id": "cse_3302"
         },
         {
             "name": "CSE 3350",
             "title": "Digital Design Laboratory",
-            "group_id": "cse_3350"
+            "id": "cse_3350"
         },
         {
             "name": "CSE 3400",
             "title": "Introduction to Computer and Network Security",
-            "group_id": "cse_3400"
+            "id": "cse_3400"
         },
         {
             "name": "CSE 3500",
             "title": "Algorithms and Complexity",
-            "group_id": "cse_3500"
+            "id": "cse_3500"
         },
         {
             "name": "CSE 3502",
             "title": "Theory of Computation",
-            "group_id": "cse_3502"
+            "id": "cse_3502"
         },
         {
             "name": "CSE 3504",
             "title": "Probabilistic Performance Analysis of Computer Systems",
-            "group_id": "cse_3504"
+            "id": "cse_3504"
         },
         {
             "name": "CSE 3666",
             "title": "Introduction to Computer Architecture",
-            "group_id": "cse_3666"
+            "id": "cse_3666"
         },
         {
             "name": "CSE 3800",
             "title": "Bioinformatics",
-            "group_id": "cse_3800"
+            "id": "cse_3800"
         },
         {
             "name": "CSE 3802",
             "title": "Numerical Methods in Scientific Computation",
-            "group_id": "cse_3802"
+            "id": "cse_3802"
         },
         {
             "name": "CSE 3810",
             "title": "Computational Genomics",
-            "group_id": "cse_3810"
+            "id": "cse_3810"
         },
         {
             "name": "CSE 4095",
             "title": "Special Topics in Computer Science and Engineering",
-            "group_id": "cse_4095"
+            "id": "cse_4095"
         },
         {
             "name": "CSE 4099",
             "title": "Independent Study in Computer Science and Engineering",
-            "group_id": "cse_4099"
+            "id": "cse_4099"
         },
         {
             "name": "CSE 4100",
             "title": "Programming Language Translation",
-            "group_id": "cse_4100"
+            "id": "cse_4100"
         },
         {
             "name": "CSE 4102",
             "title": "Programming Languages",
-            "group_id": "cse_4102"
+            "id": "cse_4102"
         },
         {
             "name": "CSE 4300",
             "title": "Operating Systems",
-            "group_id": "cse_4300"
+            "id": "cse_4300"
         },
         {
             "name": "CSE 4302",
             "title": "Computer Organization and Architecture",
-            "group_id": "cse_4302"
+            "id": "cse_4302"
         },
         {
             "name": "CSE 4400",
             "title": "Computer Security",
-            "group_id": "cse_4400"
+            "id": "cse_4400"
         },
         {
             "name": "CSE 4402",
             "title": "Network Security",
-            "group_id": "cse_4402"
+            "id": "cse_4402"
         },
         {
             "name": "CSE 4500",
             "title": "Parallel Systems",
-            "group_id": "cse_4500"
+            "id": "cse_4500"
         },
         {
             "name": "CSE 4502",
             "title": "Big Data Analytics",
-            "group_id": "cse_4502"
+            "id": "cse_4502"
         },
         {
             "name": "CSE 4701",
             "title": "Principles of Databases",
-            "group_id": "cse_4701"
+            "id": "cse_4701"
         },
         {
             "name": "CSE 4702",
             "title": "Introduction to Modern Cryptography",
-            "group_id": "cse_4702"
+            "id": "cse_4702"
         },
         {
             "name": "CSE 4703",
             "title": "Principles of Computer Graphics",
-            "group_id": "cse_4703"
+            "id": "cse_4703"
         },
         {
             "name": "CSE 4704",
             "title": "Computational Geometry",
-            "group_id": "cse_4704"
+            "id": "cse_4704"
         },
         {
             "name": "CSE 4705",
             "title": "Artificial Intelligence",
-            "group_id": "cse_4705"
+            "id": "cse_4705"
         },
         {
             "name": "CSE 4709",
             "title": "Networked Embedded Systems",
-            "group_id": "cse_4709"
+            "id": "cse_4709"
         },
         {
             "name": "CSE 4820",
             "title": "Introduction to Machine Learning",
-            "group_id": "cse_4820"
+            "id": "cse_4820"
         },
         {
             "name": "CSE 4900",
             "title": "Independent Design Laboratory",
-            "group_id": "cse_4900"
+            "id": "cse_4900"
         },
         {
             "name": "CSE 4904",
             "title": "Computer Science Design Laboratory",
-            "group_id": "cse_4904"
+            "id": "cse_4904"
         },
         {
             "name": "CSE 4905",
             "title": "Networking and Distributed Systems Laboratory",
-            "group_id": "cse_4905"
+            "id": "cse_4905"
         },
         {
             "name": "CSE 4939W",
             "title": "Computer Science and Engineering Design Project I",
-            "group_id": "cse_4939w"
+            "id": "cse_4939w"
         },
         {
             "name": "CSE 4940",
             "title": "Computer Science and Engineering Design Project II",
-            "group_id": "cse_4940"
+            "id": "cse_4940"
         },
         {
             "name": "CSE 4950",
             "title": "Electrical and Computer Engineering Design I",
-            "group_id": "cse_4950"
+            "id": "cse_4950"
         },
         {
             "name": "CSE 4951",
             "title": "Electrical and Computer Engineering Design II",
-            "group_id": "cse_4951"
+            "id": "cse_4951"
         },
         {
             "name": "CSE 4997",
             "title": "Senior Thesis in Computer Science and Engineering",
-            "group_id": "cse_4997"
+            "id": "cse_4997"
         }
     ]
 }
