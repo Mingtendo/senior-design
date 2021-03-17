@@ -9,8 +9,10 @@ import firebase from '../firebase';
 
 
 
-export default function App({ navigation }) {
-    const [selectedCourses, setselectedCourses] = useState([]);
+export default function App({ route, navigation }) {
+    const currentCourses = route.params.Courses;
+    const [selectedCourses, setselectedCourses] = useState(currentCourses);
+    console.log(currentCourses);
 
     const { user } = useContext(Auth);
     const currentUser = user.toJSON();

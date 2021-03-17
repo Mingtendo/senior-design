@@ -5,10 +5,12 @@ import firebase from '../firebase';
 
 import {Auth} from './AuthContext';
 
-export default function App({ navigation }) {
+export default function App({ navigation }, {route}) {
 
     const { logout, user } = useContext(Auth);
     const currentUser = user.toJSON();
+
+    const [Courses, setCourses] = useState([]);
 
     useEffect(() => {
         async function profileListener() {
@@ -19,7 +21,11 @@ export default function App({ navigation }) {
             if (!doc.exists) {
                 console.log('No user found.');
             } else{
-                console.log(doc.data());
+                //console.log(doc.data());
+                const data = doc.data();
+                setCourses(data.courseList);
+                //console.log('courseList: ', data.courseList);
+                //console.log('Courses: ', Courses);
             }
         }
         profileListener();
@@ -29,7 +35,7 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <Text>Profile page will be listed here</Text>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Courses')}>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Courses',  Courses )}>
                 <Text style={styles.loginText}>Select Courses</Text>
             </TouchableOpacity>
 
