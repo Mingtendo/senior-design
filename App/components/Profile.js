@@ -5,7 +5,7 @@ import firebase from '../firebase';
 
 import {Auth} from './AuthContext';
 
-export default function App({ navigation }, {route}) {
+export default function App({ navigation }) {
 
     const { logout, user } = useContext(Auth);
     const currentUser = user.toJSON();
@@ -13,7 +13,7 @@ export default function App({ navigation }, {route}) {
     const [Courses, setCourses] = useState([]);
 
     useEffect(() => {
-        async function profileListener() {
+        const profileListener = async () => {
             const userRef = firebase.firestore()
             .collection('PROFILES')
             .doc(currentUser.uid)
@@ -27,15 +27,16 @@ export default function App({ navigation }, {route}) {
                 //console.log('courseList: ', data.courseList);
                 //console.log('Courses: ', Courses);
             }
-        }
+        };
         profileListener();
-    }, []);
+    }, [setCourses]);
 
     return (
         <View style={styles.container}>
             <Text>Profile page will be listed here</Text>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Courses',  Courses )}>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => {navigation.navigate('Courses', { Courses });
+                console.log(Courses);}}>
                 <Text style={styles.loginText}>Select Courses</Text>
             </TouchableOpacity>
 

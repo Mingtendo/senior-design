@@ -11,9 +11,8 @@ import firebase from '../firebase';
 
 export default function App({ route, navigation }) {
     const currentCourses = route.params.Courses;
-    const [selectedCourses, setselectedCourses] = useState(currentCourses);
-    console.log(currentCourses);
-
+    const [selectedCourses, setselectedCourses] = useState(currentCourses? currentCourses : []); 
+    
     const { user } = useContext(Auth);
     const currentUser = user.toJSON();
 
@@ -22,10 +21,8 @@ export default function App({ route, navigation }) {
         .collection('PROFILES')
         .doc(currentUser.uid)
         .set({
-            courseList: {
-                courses
-            }
-        }, { merge: true });
+            courseList: courses
+        });
     }
 
 
@@ -77,7 +74,10 @@ export default function App({ route, navigation }) {
                     }
                 } 
              />
-             <TouchableOpacity style={styles.loginBtn} onPress={() => updateCourseList(selectedCourses)}>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => {
+                updateCourseList(selectedCourses);
+                navigation.navigate('Profile');
+                }}>
                 <Text style={styles.loginText}>UPDATE COURSES</Text>
             </TouchableOpacity>
             
