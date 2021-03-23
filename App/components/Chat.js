@@ -61,13 +61,6 @@ export default function App({ route }) {
                         ...collectionData
                     };
 
-                    if (!collectionData.system) {
-                        data.user = {
-                            ...collectionData.user,
-                            name: collectionData.user.email
-                        };
-                    }
-
                     return data;
                 });
 

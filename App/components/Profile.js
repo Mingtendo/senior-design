@@ -13,23 +13,15 @@ export default function App({ navigation }) {
     const [Courses, setCourses] = useState([]);
 
     useEffect(() => {
-        const profileListener = async () => {
-            const userRef = firebase.firestore()
+        const profilesListener = firebase.firestore()
             .collection('PROFILES')
             .doc(currentUser.uid)
-            const doc = await userRef.get();
-            if (!doc.exists) {
-                console.log('No user found.');
-            } else{
-                //console.log(doc.data());
-                const data = doc.data();
-                setCourses(data.courseList);
-                //console.log('courseList: ', data.courseList);
-                //console.log('Courses: ', Courses);
-            }
-        };
-        profileListener();
-    }, [setCourses]);
+            .onSnapshot(query => {
+                const profileData = query.data();
+                setCourses(profileData.courseList);
+            });
+        return () => profilesListener();
+    }, []);
 
     return (
         <View style={styles.container}>

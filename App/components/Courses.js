@@ -11,7 +11,7 @@ import firebase from '../firebase';
 
 export default function App({ route, navigation }) {
     const currentCourses = route.params.Courses;
-    const [selectedCourses, setselectedCourses] = useState(currentCourses? currentCourses : []); 
+    const [selectedCourses, setselectedCourses] = useState(currentCourses ? currentCourses : []); 
     
     const { user } = useContext(Auth);
     const currentUser = user.toJSON();
@@ -22,7 +22,7 @@ export default function App({ route, navigation }) {
         .doc(currentUser.uid)
         .set({
             courseList: courses
-        });
+        }, {merge: true});
     }
 
 
