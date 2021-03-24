@@ -12,28 +12,31 @@ export default function ChatList({ navigation }) {
     const {courses} = useContext(Profile);
 
     useFocusEffect(() => {
+        var course_names = [];
         if(courses.length > 0) {
-            const course_names = courses.map(course => course.name);
-            const chatListener = firebase.firestore()
-                .collection('CHATS')
-                .where('name', 'in', course_names)
-                .onSnapshot(query => {
-                    const chats = query.docs.map(documentSnapshot => {
-                        return {
-                            _id: documentSnapshot.id,
-                            // give defaults
-                            name: '',
+            course_names = courses.map(course => course.name);
+        } else {
+            course_names = ['nonefound'];
+        };
+        const chatListener = firebase.firestore()
+            .collection('CHATS')
+            .where('name', 'in', course_names)
+            .onSnapshot(query => {
+                const chats = query.docs.map(documentSnapshot => {
+                    return {
+                        _id: documentSnapshot.id,
+                        // give defaults
+                        name: '',
 
-                            latestMessage: {
-                                text: ''
-                            },
-                            ...documentSnapshot.data()
-                        };
-                    });
-                    setChats(chats);
+                        latestMessage: {
+                            text: ''
+                        },
+                        ...documentSnapshot.data()
+                    };
                 });
-            return () => chatListener();
-        }
+                setChats(chats);
+            });
+        return () => chatListener();
     });
 
     return (
