@@ -1,18 +1,15 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
 import SearchableDropdown from 'react-native-searchable-dropdown';
-import {Auth} from './AuthContext';
-
+import {Auth} from '../contexts/AuthContext';
+import {Profile} from '../contexts/ProfileContext';
 import Courses from '../courses.json'
 import firebase from '../firebase';
-
-
 
 export default function App({ route, navigation }) {
     const currentCourses = route.params.Courses;
     const [selectedCourses, setselectedCourses] = useState(currentCourses ? currentCourses : []); 
-    
+    const {setCourses} = useContext(Profile);
     const { user } = useContext(Auth);
     const currentUser = user.toJSON();
 
@@ -23,9 +20,8 @@ export default function App({ route, navigation }) {
         .set({
             courseList: courses
         }, {merge: true});
+        setCourses(courses);
     }
-
-
 
     return (
         <View>
@@ -44,8 +40,8 @@ export default function App({ route, navigation }) {
                     }
                 }
                 chip={true}
-                resetValue={false}
-                onRemoveItem={(item, index) => {
+                resetValue={true}
+                onRemoveItem={(item) => {
                     const updatedCourses = selectedCourses.filter((sitem) => sitem.id !== item.id);
                     setselectedCourses(updatedCourses);
                 }}
@@ -69,8 +65,7 @@ export default function App({ route, navigation }) {
                             borderWidth: 1,
                             borderColor: '#ccc',
                             borderRadius: 5,
-                        },
-                        onTextChange: text => console.log(text)
+                        }
                     }
                 } 
              />

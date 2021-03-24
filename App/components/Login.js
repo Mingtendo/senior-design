@@ -1,14 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import firebase from '../firebase';
-
-import {Auth} from './AuthContext';
-
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const { login } = useContext(Auth);
 
   const loginNavigation = (email, password) => {
@@ -98,7 +94,6 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
-    //alignItems: "flex-start",
   },
 
   TextInput: {

@@ -1,37 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import firebase from '../firebase';
+import {Auth} from '../contexts/AuthContext';
+import {Profile} from '../contexts/ProfileContext';
 
 export default function ChatList({ navigation }) {
-
     const [chats, setChats] = useState([]);
+    const { user } = useContext(Auth);
+    const currentUser = user.toJSON();
+    const {courses} = useContext(Profile);
 
-    useEffect(() => {
-        const unsubscribe = firebase.firestore()
-            .collection('CHATS')
-            .onSnapshot(querySnapshot => {
-                const chats = querySnapshot.docs.map(documentSnapshot => {
-                    return {
-                        _id: documentSnapshot.id,
-                        // give defaults
-                        name: '',
+    useFocusEffect(() => {
+        if(courses.length > 0) {
+            const course_names = courses.map(course => course.name);
+            const chatListener = firebase.firestore()
+                .collection('CHATS')
+                .where('name', 'in', course_names)
+                .onSnapshot(query => {
+                    const chats = query.docs.map(documentSnapshot => {
+                        return {
+                            _id: documentSnapshot.id,
+                            // give defaults
+                            name: '',
 
-                        latestMessage: {
-                            text: ''
-                        },
-                        ...documentSnapshot.data()
-                    };
+                            latestMessage: {
+                                text: ''
+                            },
+                            ...documentSnapshot.data()
+                        };
+                    });
+                    setChats(chats);
                 });
-
-                setChats(chats);
-            });
-
-        /**
-         * unsubscribe listener
-         */
-        return () => unsubscribe();
-    }, []);
+            return () => chatListener();
+        }
+    });
 
     return (
         <View style={styles.container}>

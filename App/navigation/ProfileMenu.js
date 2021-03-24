@@ -1,13 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import Courses from './Courses';
-import Profile from './Profile';
-import {Auth} from './AuthContext'
-
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import React from 'react';
+import Courses from '../components/Courses';
+import Profile from '../components/Profile';
 import { createStackNavigator } from '@react-navigation/stack';
-import firebase from '../firebase';
 
 const ProfileStack = createStackNavigator();
 

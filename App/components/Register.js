@@ -1,16 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Alert, ActivityIndicator, View, StyleSheet, Text, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import firebase from '../firebase';
-
-import {Auth} from './AuthContext';
+import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
-
     const [displayName, setdisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setpasswordConfirm] = useState('');
-
     const {register} = useContext(Auth);
 
     const registerNavigation = (email, password, passwordConfirm) => {
@@ -21,37 +17,6 @@ export default function App({ navigation }) {
             console.log(err);
         })
     }
-
-
-    /*     registerUser = () => {
-            if(this.state.email === '' && this.state.password === '' && this.state.passwordConfirm === '') {
-                Alert.alert('Enter details to register!')
-            } else {
-                if (this.state.password !== this.state.passwordConfirm) {
-                    Alert.alert('Passwords do not match!')
-                } else {
-                    this.setState({
-                        isLoading: true,
-                    })
-                    firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                    .then((res) => {
-                        res.user.updateProfile({
-                            displayName: this.state.displayName
-                        })
-                        console.log('User registered successfully!')
-                        this.setState({
-                            isLoading: false,
-                            displayName: '',
-                            email: '',
-                            password: ''
-                        })
-                        this.props.navigation.navigate('Login')
-                    })
-                    .catch(error => this.setState ({ errorMessage: error.message}))
-                }
-            } */
 
 /*     const register = async () => {
         //setShowLoading(true);

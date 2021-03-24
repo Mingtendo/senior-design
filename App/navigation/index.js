@@ -1,21 +1,14 @@
-
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import Login from './Login';
-import Menu from './Menu';
-import Register from './Register';
-import Forgot from './ForgotPass';
-
-import {Auth} from './AuthContext'
-
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import Login from '../components/Login';
+import MenuIndex from './MenuIndex';
+import Register from '../components/Register';
+import Forgot from '../components/ForgotPass';
+import {Auth} from '../contexts/AuthContext';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import firebase from '../firebase';
 
-
 const Stack = createStackNavigator();
-
 
 function LoginStack() {
   return (
@@ -55,12 +48,10 @@ export default function App() {
       const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
       return subscriber; // unsubscribe on unmount
     }, []);
-  
-
 
   return (
       <NavigationContainer>
-        {user ? <Menu/> : <LoginStack /> }
+        {user ? <MenuIndex/> : <LoginStack /> }
       </NavigationContainer>
   );
 }

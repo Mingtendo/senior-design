@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from '../firebase';
-
-import {Auth} from './AuthContext';
+import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
 
@@ -27,8 +25,7 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <Text>Profile page will be listed here</Text>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={() => {navigation.navigate('Courses', { Courses });
-                console.log(Courses);}}>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => {navigation.navigate('Courses', { Courses })}}>
                 <Text style={styles.loginText}>Select Courses</Text>
             </TouchableOpacity>
 
