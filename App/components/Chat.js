@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
 import firebase from '../firebase';
-
-import { Auth } from './AuthContext';
+import { Auth } from '../contexts/AuthContext';
 
 export default function App({ route }) {
-
     const { user } = useContext(Auth);
     const { chat } = route.params;
     const [messages, setMessages] = useState([]);
@@ -43,7 +41,6 @@ export default function App({ route }) {
 
     }
 
-
     useEffect(() => {
         const messagesListener = firebase.firestore()
             .collection('CHATS')
@@ -60,13 +57,6 @@ export default function App({ route }) {
                         createdAt: new Date().getTime(),
                         ...collectionData
                     };
-
-                    if (!collectionData.system) {
-                        data.user = {
-                            ...collectionData.user,
-                            name: collectionData.user.email
-                        };
-                    }
 
                     return data;
                 });

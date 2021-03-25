@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 export default function App({ navigation }) {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
  
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -34,7 +34,6 @@ export default function App({ navigation }) {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
     top: 200,
   },
 
-
   inputView: {
     backgroundColor: "#C2E0F9",
     borderRadius: 30,
@@ -72,7 +70,6 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 10,
     marginTop: 20,
-    //alignItems: "flex-start",
   },
 
   TextInput: {
@@ -81,7 +78,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 20,
   },
-
 
   linkBtn: {
     width: "70%",

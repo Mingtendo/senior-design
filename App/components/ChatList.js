@@ -1,17 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import firebase from '../firebase';
+import {Auth} from '../contexts/AuthContext';
+import {Profile} from '../contexts/ProfileContext';
 
 export default function ChatList({ navigation }) {
-
     const [chats, setChats] = useState([]);
+    const { user } = useContext(Auth);
+    const currentUser = user.toJSON();
+    const {courses} = useContext(Profile);
 
-    useEffect(() => {
-        const unsubscribe = firebase.firestore()
+    useFocusEffect(() => {
+        var course_names = [];
+        if(courses.length > 0) {
+            course_names = courses.map(course => course.name);
+        } else {
+            course_names = ['nonefound'];
+        };
+        const chatListener = firebase.firestore()
             .collection('CHATS')
-            .onSnapshot(querySnapshot => {
-                const chats = querySnapshot.docs.map(documentSnapshot => {
+            .where('name', 'in', course_names)
+            .onSnapshot(query => {
+                const chats = query.docs.map(documentSnapshot => {
                     return {
                         _id: documentSnapshot.id,
                         // give defaults
@@ -23,15 +34,10 @@ export default function ChatList({ navigation }) {
                         ...documentSnapshot.data()
                     };
                 });
-
                 setChats(chats);
             });
-
-        /**
-         * unsubscribe listener
-         */
-        return () => unsubscribe();
-    }, []);
+        return () => chatListener();
+    });
 
     return (
         <View style={styles.container}>

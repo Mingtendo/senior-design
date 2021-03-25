@@ -1,17 +1,34 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
 import firebase from '../firebase';
-
-import {Auth} from './AuthContext';
+import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
 
-    const { logout } = useContext(Auth);
+    const { logout, user } = useContext(Auth);
+    const currentUser = user.toJSON();
+
+    const [Courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        const profilesListener = firebase.firestore()
+            .collection('PROFILES')
+            .doc(currentUser.uid)
+            .onSnapshot(query => {
+                const profileData = query.data();
+                setCourses(profileData.courseList);
+            });
+        return () => profilesListener();
+    }, []);
 
     return (
         <View style={styles.container}>
             <Text>Profile page will be listed here</Text>
+
+            <TouchableOpacity style={styles.loginBtn} onPress={() => {navigation.navigate('Courses', { Courses })}}>
+                <Text style={styles.loginText}>Select Courses</Text>
+            </TouchableOpacity>
+
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => logout()}>
                 <Text style={styles.loginText}>LOGOUT</Text>
