@@ -11,7 +11,7 @@ export default function App({ navigation }) {
 
     const registerNavigation = (email, password, passwordConfirm) => {
         register(email, password, passwordConfirm).then(() => {
-            navigation.navigate('Menu');
+            console.log('We have sent you an email verification')
         })
         .catch(err => { 
             console.log(err);

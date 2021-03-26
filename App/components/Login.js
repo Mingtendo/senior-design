@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
@@ -9,7 +9,7 @@ export default function App({ navigation }) {
 
   const loginNavigation = (email, password) => {
     login(email, password).catch(err => { 
-        console.log(err);
+        alert(err);
     })
 }
 

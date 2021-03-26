@@ -19,7 +19,11 @@ export default function Menu() {
       .doc(currentUser.uid)
       .onSnapshot(query => {
         const courseData = query.data();
-        setCourses(courseData.courseList);
+        var courseList = [];
+        if(courseData){
+            courseList = courseData.courseList
+        }
+        setCourses(courseList);
       });
     return () => courseListener();
   }, []);

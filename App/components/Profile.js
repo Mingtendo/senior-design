@@ -16,7 +16,11 @@ export default function App({ navigation }) {
             .doc(currentUser.uid)
             .onSnapshot(query => {
                 const profileData = query.data();
-                setCourses(profileData.courseList);
+                var courseList = [];
+                if(profileData){
+                    courseList = profileData.courseList
+                }
+                setCourses(courseList);
             });
         return () => profilesListener();
     }, []);
