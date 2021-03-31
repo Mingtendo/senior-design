@@ -4,12 +4,15 @@ export const Profile = createContext({});
 
 export const ProfileContext = ({ children }) => {
   const [courses, setCourses] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   return (
     <Profile.Provider
       value={{
         courses,
-        setCourses
+        setCourses,
+        imageUrl,
+        setImageUrl
       }}
     >
       {children}
