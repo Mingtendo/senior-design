@@ -11,13 +11,20 @@ export default function App({ route }) {
     const { chat } = route.params;
     const [messages, setMessages] = useState([]);
     const currentUser = user.toJSON();
+    
+    let uri = Image.resolveAssetSource (defaultAvatar).uri
+    if (currentUser.photoURL){
+        uri = currentUser.photoURL
+    }
+
+    let name = 'anonymous';
+    if (currentUser.displayName){
+        name = currentUser.displayName
+    }
 
     async function handleSend(messages) {
         const text = messages[0].text;
-        let uri = Image.resolveAssetSource (defaultAvatar).uri
-        if (currentUser.photoURL){
-            uri = currentUser.photoURL
-        }
+
         firebase.firestore()
             .collection('CHATS')
             .doc(chat._id)
@@ -28,6 +35,7 @@ export default function App({ route }) {
                 user: {
                     _id: currentUser.uid,
                     email: currentUser.email,
+                    name: name,
                     avatar: uri
                 }
             });
@@ -103,13 +111,14 @@ export default function App({ route }) {
         <GiftedChat
             messages={messages}
             onSend={handleSend}
-            user={{ _id: currentUser.uid, avatar: currentUser.photoURL}}
+            user={{ name: name, _id: currentUser.uid, avatar: uri }}
             showUserAvatar={true}
             showAvatarForEveryMessage={true}
+            renderUsernameOnMessage={true}
             // renderBubble={renderBubble}
             placeholder='Type your message here...'
             alwaysShowSend
-            //renderSend={renderSend}
+            renderSend={renderSend}
             scrollToBottom
         />
     );

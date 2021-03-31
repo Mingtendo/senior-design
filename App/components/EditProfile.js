@@ -32,7 +32,7 @@ export default function App({ route, navigation }) {
         .set({
             name: name,
             bio: bio
-        });
+        }, {merge: true});
     };
 
     return (
