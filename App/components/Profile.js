@@ -2,21 +2,45 @@ import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import firebase from '../firebase';
 import { Auth } from '../contexts/AuthContext';
+import { Profile } from '../contexts/ProfileContext';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions'
-import {Profile} from '../contexts/ProfileContext';
+
+function ProfileImage(props) {
+    const imageSelected = props.imageSelected;
+    if (imageSelected) {
+        return (<View style={styles.thumbnail_container}>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+                <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+            </TouchableOpacity>
+        </View>);
+    }
+    else if(currentUser.photoURL){
+        return (<View style={styles.thumbnail_container}>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+                <Image source={{ uri: currentUser.photoURL }} style={styles.thumbnail} />
+            </TouchableOpacity>
+        </View>);
+    }
+    return (<View style={styles.thumbnail_container}>
+        <TouchableOpacity onPress={openImagePickerAsync}>
+            <Image source = {require("../assets/default-thumbnail.png")} style={styles.thumbnail}/>
+        </TouchableOpacity>
+    </View>);
+};
 
 export default function App({ navigation }) {
-
+    const { bio, setBio} = useContext(Profile);
     const { logout, user } = useContext(Auth);
-    const {imageUrl} = useContext(Profile);
     const currentUser = user.toJSON();
+
+    const nametest = user.displayName;
+    const [name, setName] = useState(nametest ? nametest : ''); 
 
     const [Courses, setCourses] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
 
     const openImagePickerAsync = async () => {
-        //let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
         const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (cameraRollPermission.status === 'granted') {
             let capturedImage = await ImagePicker.launchImageLibraryAsync();
@@ -25,8 +49,8 @@ export default function App({ navigation }) {
             }
             setSelectedImage({ localUri: capturedImage.uri });
 
-
             const imageName = 'profile' + currentUser.uid;
+            //Do this for iOS
             let uri = capturedImage.uri;
             let newUri = uri.replace('file://', '')
 
@@ -48,19 +72,24 @@ export default function App({ navigation }) {
     function ProfileImage(props) {
         const imageSelected = props.imageSelected;
         if (imageSelected) {
-            return (<View style={styles.container}>
-                <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+            return (<View style={styles.thumbnail_container}>
+                <TouchableOpacity onPress={openImagePickerAsync}>
+                    <Image source={{ uri: selectedImage.localUri }} style={styles.thumbnail} />
+                </TouchableOpacity>
             </View>);
         }
         else if(currentUser.photoURL){
-            console.log("We are here");
-            return (<View style={styles.container}>
-                <Image source={{ uri: currentUser.photoURL }} style={styles.thumbnail} />
+            return (<View style={styles.thumbnail_container}>
+                <TouchableOpacity onPress={openImagePickerAsync}>
+                    <Image source={{ uri: currentUser.photoURL }} style={styles.thumbnail} />
+                </TouchableOpacity>
             </View>);
         }
-
-        //Maybe blank profile screen or Icon
-        return <View></View>
+        return (<View style={styles.thumbnail_container}>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+                <Image source = {require("../assets/default-thumbnail.png")} style={styles.thumbnail}/>
+            </TouchableOpacity>
+        </View>);
     };
 
     useEffect(() => {
@@ -70,28 +99,48 @@ export default function App({ navigation }) {
             .onSnapshot(query => {
                 const profileData = query.data();
                 var courseList = [];
+                var name = '';
+                var bio = '';
                 if (profileData) {
-                    courseList = profileData.courseList
+                    if (profileData.hasOwnProperty('courseList')){
+                        courseList = profileData.courseList;
+                    }
+                    if (profileData.hasOwnProperty('name')){
+                        name = profileData.name;
+                    }
+                    if (profileData.hasOwnProperty('bio')){
+                        bio = profileData.bio;
+                    }
                 }
                 setCourses(courseList);
+                setBio(bio);
+                setName(name);
             });
         return () => profilesListener();
     }, []);
 
     return (
         <View style={styles.container}>
-            <Text>Profile page will be listed here</Text>
+            <ProfileImage imageSelected={selectedImage}/>
 
-            <ProfileImage imageSelected={selectedImage} />
+            <Text>{name}</Text>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={openImagePickerAsync}>
-                <Text style={styles.loginText}>Upload a profile picture</Text>
+            <Text>{bio}</Text>
+
+            <TouchableOpacity style={styles.loginBtn} onPress={() => { 
+                let thumbnail = '';
+                if(selectedImage){
+                    thumbnail = selectedImage.localUri;
+                } else if(currentUser.photoURL){
+                    thumbnail = currentUser.photoURL;
+                };
+                navigation.navigate('EditProfile', thumbnail); }}>
+                <Text style={styles.loginText}>Edit Profile</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => { navigation.navigate('Courses', { Courses }) }}>
                 <Text style={styles.loginText}>Select Courses</Text>
             </TouchableOpacity>
-
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => logout()}>
                 <Text style={styles.loginText}>LOGOUT</Text>
@@ -105,9 +154,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
     },
-
     loginBtn: {
         width: "80%",
         borderRadius: 25,
@@ -117,9 +164,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: "#2174C3",
     },
+    thumbnail_container: {
+        alignItems:"center",
+        paddingTop: 50,
+        paddingBottom: 10
+    },
     thumbnail: {
         width: 150,
         height: 150,
-        resizeMode: "contain"
+        borderRadius: 400/ 2
     }
 });

@@ -21,7 +21,9 @@ export default function Menu() {
         const courseData = query.data();
         var courseList = [];
         if(courseData){
+          if (courseData.hasOwnProperty('courseList')){
             courseList = courseData.courseList
+          }
         }
         setCourses(courseList);
       });

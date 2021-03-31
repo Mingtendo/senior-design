@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity, TouchableWi
 import {Auth} from '../contexts/AuthContext';
 
 export default function App({ navigation }) {
-    const [displayName, setdisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setpasswordConfirm] = useState('');
@@ -11,55 +10,18 @@ export default function App({ navigation }) {
 
     const registerNavigation = (email, password, passwordConfirm) => {
         register(email, password, passwordConfirm).then(() => {
-            console.log('We have sent you an email verification')
+            console.log('We have sent you an email verification');
         })
         .catch(err => { 
             console.log(err);
         })
-    }
-
-/*     const register = async () => {
-        //setShowLoading(true);
-        if (email === '' && password === '') { Alert.alert('Enter details to register!') }
-        if (password !== passwordConfirm) { Alert.alert('Passwords do not match!') }
-        else {
-            try {
-                const doRegister = await firebase.auth().createUserWithEmailAndPassword(email, password);
-                //setShowLoading(false);
-                if (doRegister.user) {
-                    try {
-                        firebase.auth().currentUser.sendEmailVerification();
-                    } catch (e) {
-                        Alert.alert(e.message);
-                    }
-
-                    navigation.navigate('Chat');
-                }
-            } catch (e) {
-                //setShowLoading(false);
-                Alert.alert(
-                    e.message
-                );
-            }
-
-        }
     };
- */
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
                 <Image style={styles.image} source={require("../assets/UStudy.png")}/>
                 <Text style={styles.joinUs}>Join UStudy</Text>
-
-                <View style={styles.inputView}>
-                    <TextInput
-                        style={styles.TextInput}
-                        placeholder="Name:"
-                        placeholderTextColor="#003f5c"
-                        value={displayName}
-                        onChangeText={(displayName) => setdisplayName(displayName)}
-                    />
-                </View>
 
                 <View style={styles.inputView}>
                     <TextInput
