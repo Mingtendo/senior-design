@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
+import firebase from '../firebase';
+
 export default function App({ navigation }) {
   const [email, setEmail] = useState('');
+
+  const sendResetEmail = () => {
+    firebase.auth().sendPasswordResetEmail(email).then(() => {
+      navigation.navigate('Login');
+      alert('You have been sent an email to reset your password.  You can login after your password has been reset');
+    }).catch( err => {
+      console.log(err);
+    })
+  }
  
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -25,8 +36,8 @@ export default function App({ navigation }) {
           />
         </View>
 
-        <TouchableOpacity style={styles.linkBtn}>
-          <Text style={styles.loginText}>Send Login Link</Text>
+        <TouchableOpacity style={styles.linkBtn} onPress={()=> sendResetEmail()}>
+          <Text style={styles.loginText}>Send Password Reset Email</Text>
         </TouchableOpacity>
         
       </View>

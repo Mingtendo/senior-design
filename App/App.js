@@ -5,7 +5,7 @@ import {AuthContext} from './contexts/AuthContext';
 export default function App() {
   return(
     <AuthContext>
-         <Index/>
+        <Index/>
     </AuthContext>
   );
 }
