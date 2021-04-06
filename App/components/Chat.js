@@ -85,7 +85,7 @@ export default function App({ route }) {
                 {...props}
                 wrapperStyle={{
                     right:{
-                        backgroundColor: '00BFFF'
+                        backgroundColor: '#00BFFF'
                     }
                 }}
                 textStyle={{
@@ -115,7 +115,7 @@ export default function App({ route }) {
             showUserAvatar={true}
             showAvatarForEveryMessage={true}
             renderUsernameOnMessage={true}
-            // renderBubble={renderBubble}
+            renderBubble={renderBubble}
             placeholder='Type your message here...'
             alwaysShowSend
             renderSend={renderSend}

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Avatar, GiftedChat} from 'react-native-gifted-chat';
 import { useFocusEffect } from '@react-navigation/native';
 import firebase from '../firebase';
 import {Auth} from '../contexts/AuthContext';
@@ -63,14 +64,13 @@ const styles = StyleSheet.create({
     },
 
     list: {
-        
+        backgroundColor: '#C2E0F9',
+        alignItems:'center',
+        borderBottomWidth: .5,
+        borderBottomColor: '#CECECE'
     },
 
     chat: {
-        backgroundColor: "#2174C3",
-        alignItems:'center',
-        width: 'auto',
-        borderRadius: 30,
         height: 45,
         margin: 10,
     },
