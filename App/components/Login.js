@@ -60,7 +60,7 @@ export default function App({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.loginBtn} onPress={() => loginNavigation(email, password)}>
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
@@ -106,6 +106,10 @@ const styles = StyleSheet.create({
   forgot_button: {
     height: 30,
     marginBottom: 30,
+  },
+
+  loginText: {
+    color: 'white',
   },
 
   loginBtn: {

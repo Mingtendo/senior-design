@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Auth} from '../contexts/AuthContext';
 import {Profile} from '../contexts/ProfileContext';
 import firebase from '../firebase.js';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,8 +33,26 @@ export default function Menu() {
 
   return (
       <Tab.Navigator>
-        <Tab.Screen name="Profile" component={ProfileMenu} />
-        <Tab.Screen name="Chat" component={ChatMenu} />
+        <Tab.Screen 
+        name="Profile" 
+        component={ProfileMenu}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }} 
+        />
+
+        <Tab.Screen 
+        name="Chat" 
+        component={ChatMenu}
+        options={{
+          tabBarLabel: 'Chat',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="chat-outline" color={color} size={size} />
+          ),
+        }} />
       </Tab.Navigator>
   );
 }

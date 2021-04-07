@@ -123,9 +123,23 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <ProfileImage imageSelected={selectedImage}/>
 
-            <Text>{name}</Text>
+            <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>{name}</Text>
+            <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{bio}</Text>
 
-            <Text>{bio}</Text>
+            <View style={styles.statsContainer}>
+                    <View style={styles.statsBox}>
+                        <Text style={[styles.text, { fontSize: 24 }]}>5</Text>
+                        <Text style={[styles.text, styles.subText]}>Courses</Text>
+                    </View>
+                    <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                        <Text style={[styles.text, { fontSize: 24 }]}>312</Text>
+                        <Text style={[styles.text, styles.subText]}>UFriends</Text>
+                    </View>
+                    <View style={styles.statsBox}>
+                        <Text style={[styles.text, { fontSize: 24 }]}>6</Text>
+                        <Text style={[styles.text, styles.subText]}>Chat Groups</Text>
+                    </View>
+                </View>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => { 
                 let thumbnail = '';
@@ -135,17 +149,18 @@ export default function App({ navigation }) {
                     thumbnail = currentUser.photoURL;
                 };
                 navigation.navigate('EditProfile', thumbnail); }}>
-                <Text style={styles.loginText}>Edit Profile</Text>
+                <Text style={styles.loginText}>Edit Profile                                            ></Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => { navigation.navigate('Courses', { Courses }) }}>
-                <Text style={styles.loginText}>Select Courses</Text>
+                <Text style={styles.loginText}>Select Courses                                    ></Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.loginBtn} onPress={() => logout()}>
-                <Text style={styles.loginText}>LOGOUT</Text>
-            </TouchableOpacity>
+                <Text style={styles.loginText}>Log Out                                                  ></Text>
+            </TouchableOpacity> 
         </View>
+        
     );
 }
 
@@ -155,18 +170,40 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
     },
-    loginBtn: {
-        width: "80%",
-        borderRadius: 25,
-        height: 50,
+
+    text: {
+        fontFamily: "HelveticaNeue",
+        color: "#52575D"
+    },
+
+    statsContainer: {
+        flexDirection: "row",
+        alignSelf: "center",
+        marginTop: 32,
+        marginBottom: 30
+    },
+    statsBox: {
         alignItems: "center",
+        flex: 1
+    },
+
+    loginText: {
+        color: 'white',
+        fontSize: 18,
+        paddingLeft: 10,
+        fontWeight: "600"
+    }, 
+
+    loginBtn: {
+        width: "85%",
+        height: 60,
+        alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: 20,
-        backgroundColor: "#2174C3",
+        backgroundColor: "#b0d7f7",
     },
     thumbnail_container: {
         alignItems:"center",
-        paddingTop: 50,
+        paddingTop: 30,
         paddingBottom: 10
     },
     thumbnail: {

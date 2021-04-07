@@ -49,33 +49,33 @@ export default function App({ route, navigation }) {
                 itemStyle={{
                     padding: 10,
                     marginTop: 2,
-                    backgroundColor: '#ddd',
-                    borderColor: '#bbb',
+                    alignItems: "center",
+                    backgroundColor: "#C2E0F9",
+                    borderColor: "#C2E0F9",
                     borderWidth: 1,
                     borderRadius: 5,
                 }}
-                itemTextStyle={{ color: '#222' }}
-                itemsContainerStyle={{ maxHeight: 140 }}
+                itemTextStyle={{ color: "#C2E0F9"}}
+                itemsContainerStyle={{ maxHeight: 140}}
                 textInputProps={
                     {
-                        placeholder: "placeholder",
+                        placeholder: "Select Courses",
                         underlineColorAndroid: "transparent",
                         style: {
                             padding: 12,
                             borderWidth: 1,
-                            borderColor: '#ccc',
+                            borderColor: "#C2E0F9",
                             borderRadius: 5,
                         }
                     }
                 } 
              />
-            <TouchableOpacity style={styles.loginBtn} onPress={() => {
+                <TouchableOpacity style={styles.loginBtn} onPress={() => {
                 updateCourseList(selectedCourses);
                 navigation.navigate('Profile');
                 }}>
-                <Text style={styles.loginText}>UPDATE COURSES</Text>
-            </TouchableOpacity>
-            
+                <Text style={styles.loginText}>Update Courses</Text>
+                </TouchableOpacity>   
         </View>
     );
 }
@@ -84,12 +84,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+
     },
 
+    loginText: {
+        color: 'white',
+        
+    }, 
+
     loginBtn: {
-        width: "80%",
+        width: "100%",
         borderRadius: 25,
         height: 50,
         alignItems: "center",

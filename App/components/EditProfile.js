@@ -81,13 +81,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
     },
+
+    loginText: {
+        color: 'white',
+    }, 
+
     loginBtn: {
         width: "80%",
         borderRadius: 25,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 20,
+        marginTop: 10,
         backgroundColor: "#2174C3",
     },
     nameInputView: {
@@ -120,8 +125,8 @@ const styles = StyleSheet.create({
     },
     thumbnail_container: {
         alignItems:"center",
-        paddingTop: 50,
-        paddingBottom: 50
+        paddingTop: 30,
+        paddingBottom: 30
     },
     thumbnail: {
         width: 150,
